@@ -26,6 +26,10 @@
 
 .RELEASENOTES 
 
+1.7 - 1/16/2019
+ -- MODIFIED BY Marc Hamilton
+ -- Updated the parameters to accept environment for tenants other than public
+
 1.6 - 11/15/2018
  -- MODIFIED BY Alexander Zabielski
  -- Updated the parameters to accept a TenantID to pass to the connection params.
@@ -101,6 +105,10 @@
     Optional. The name of the OMS Workspace to be referenced. If not specified, a new OMS workspace 
 
     is created using a unique identifier.
+    
+.PARAMETER Environment
+
+    Optional. For non public environments such as Government subscriptions
 
 
 .PARAMETER AutomationAccountName
@@ -124,6 +132,9 @@
 
     New-OnPremiseHybridWorker -AutomationAccountName "ContosoAA" -AAResourceGroupName "ContosoResources" -HybridGroupName "ContosoHybridGroup" -SubscriptionId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
+.EXAMPLE
+
+    New-OnPremiseHybridWorker -AutomationAccountName "ContosoAA" -AAResourceGroupName "ContosoResources" -HybridGroupName "ContosoHybridGroup" -SubscriptionId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" -Environment AzureUSGovernment
 
 .EXAMPLE
 
@@ -162,6 +173,10 @@ Param (
 # OMS Workspace
 [Parameter(Mandatory=$false)]
 [String] $WorkspaceName = "hybridWorkspace" + (Get-Random -Maximum 99999),
+
+# Environment
+[Parameter(Mandatory=$false)]
+[String] $Environment,
 
 # Automation Account
 [Parameter(Mandatory=$true)]
